@@ -1,22 +1,11 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+const Category = require('../models/Category');
+const Question = require('../models/Question');
+const QuizResult = require('../models/QuizResult');
 
 const router = express.Router();
-const JWT_SECRET = 'your-secret-key-change-this';
-const dataDir = path.join(__dirname, '../data');
-
-function getFile(filename) {
-  const file = path.join(dataDir, filename);
-  const data = fs.readFileSync(file, 'utf8');
-  return JSON.parse(data);
-}
-
-function saveFile(filename, data) {
-  const file = path.join(dataDir, filename);
-  fs.writeFileSync(file, JSON.stringify(data, null, 2));
-}
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
 
 // Middleware to verify token
 const verifyToken = (req, res, next) => {
@@ -35,10 +24,10 @@ const verifyToken = (req, res, next) => {
 };
 
 // Get all categories
-router.get('/categories', verifyToken, (req, res) => {
+router.get('/categories', verifyToken, async (req, res) => {
   try {
     console.log('📌 API /categories appelé - UserId:', req.userId);
-    const categories = getFile('categories.json');
+    const categories = await Category.find().limit(10);
     console.log('✅ Catégories trouvées:', categories.length);
     res.json(categories);
   } catch (error) {
@@ -48,15 +37,15 @@ router.get('/categories', verifyToken, (req, res) => {
 });
 
 // Get questions for a category
-router.get('/category/:categoryId', verifyToken, (req, res) => {
+router.get('/category/:categoryId', verifyToken, async (req, res) => {
   try {
     const { categoryId } = req.params;
-    const questions = getFile('questions.json');
+    const questions = await Question.find();
 
     let filtered;
-    if (categoryId === '5') {
+    if (categoryId === '5' || categoryId === 5) {
       // Mixed - questions aléatoires
-      filtered = questions.sort(() => Math.random() - 0.5).slice(0, 15);
+      filtered = questions.sort(() => 0.5 - Math.random()).slice(0, 15);
     } else {
       // Catégorie spécifique
       filtered = questions
@@ -66,20 +55,21 @@ router.get('/category/:categoryId', verifyToken, (req, res) => {
 
     res.json(filtered);
   } catch (error) {
+    console.error('Quiz error:', error);
     res.status(500).json({ message: 'Erreur serveur' });
   }
 });
 
 // Submit quiz
-router.post('/submit', verifyToken, (req, res) => {
+router.post('/submit', verifyToken, async (req, res) => {
   try {
     const { categoryId, responses } = req.body;
     const userId = req.userId;
-    const questions = getFile('questions.json');
+    const questions = await Question.find();
 
     let correctCount = 0;
     const totalQuestions = responses.length;
-    const userResponses = getFile('user_responses.json');
+    const answers = [];
 
     responses.forEach(response => {
       const question = questions.find(q => q.id === response.questionId);
@@ -89,30 +79,30 @@ router.post('/submit', verifyToken, (req, res) => {
         correctCount++;
       }
 
-      userResponses.push({
-        id: userResponses.length + 1,
-        user_id: userId,
+      answers.push({
         question_id: response.questionId,
         selected_answer: response.selectedAnswer || null,
-        is_correct: isCorrect ? 1 : 0,
-        created_at: new Date().toISOString()
+        correct_answer: question?.correct_answer,
+        is_correct: isCorrect
       });
     });
 
-    saveFile('user_responses.json', userResponses);
+    // Get category name
+    const category = await Category.findOne({ id: parseInt(categoryId) });
+    const categoryName = category?.name || 'Mixed';
 
-    // Record quiz attempt
-    const attempts = getFile('quiz_attempts.json');
-    attempts.push({
-      id: attempts.length + 1,
+    // Save quiz result
+    const result = new QuizResult({
       user_id: userId,
       category_id: parseInt(categoryId),
+      category: categoryName,
       score: correctCount,
       total_questions: totalQuestions,
-      completed_at: new Date().toISOString()
+      percentage: Math.round((correctCount / totalQuestions) * 100),
+      answers
     });
-    
-    saveFile('quiz_attempts.json', attempts);
+
+    await result.save();
 
     res.json({
       score: correctCount,
@@ -120,35 +110,30 @@ router.post('/submit', verifyToken, (req, res) => {
       percentage: Math.round((correctCount / totalQuestions) * 100)
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Submit error:', error);
     res.status(500).json({ message: 'Erreur serveur' });
   }
 });
 
 // Get user results
-router.get('/results', verifyToken, (req, res) => {
+router.get('/results', verifyToken, async (req, res) => {
   try {
     const userId = req.userId;
-    const attempts = getFile('quiz_attempts.json');
-    const categories = getFile('categories.json');
+    const results = await QuizResult.find({ user_id: userId })
+      .sort({ completed_at: -1 });
 
-    const results = attempts
-      .filter(a => a.user_id === userId)
-      .map(a => {
-        const category = categories.find(c => c.id === a.category_id);
-        return {
-          id: a.id,
-          category: category?.name || 'Unknown',
-          score: a.score,
-          total_questions: a.total_questions,
-          percentage: parseFloat(((a.score * 100.0 / a.total_questions).toFixed(2))),
-          completed_at: a.completed_at
-        };
-      })
-      .sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at));
+    const formattedResults = results.map(result => ({
+      id: result._id,
+      category: result.category,
+      score: result.score,
+      total_questions: result.total_questions,
+      percentage: result.percentage,
+      completed_at: result.completed_at
+    }));
 
-    res.json(results);
+    res.json(formattedResults);
   } catch (error) {
+    console.error('Results error:', error);
     res.status(500).json({ message: 'Erreur serveur' });
   }
 });

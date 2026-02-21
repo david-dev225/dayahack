@@ -1,26 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+const User = require('../models/User');
 
 const router = express.Router();
-const JWT_SECRET = 'your-secret-key-change-this';
-const dataDir = path.join(__dirname, '../data');
-
-function getUsers() {
-  const file = path.join(dataDir, 'users.json');
-  const data = fs.readFileSync(file, 'utf8');
-  return JSON.parse(data);
-}
-
-function saveUsers(users) {
-  const file = path.join(dataDir, 'users.json');
-  fs.writeFileSync(file, JSON.stringify(users, null, 2));
-}
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
 
 // Register
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     const { email, username, fullname, password } = req.body;
 
@@ -32,24 +19,24 @@ router.post('/register', (req, res) => {
       return res.status(400).json({ message: 'Le mot de passe doit avoir au moins 6 caractères' });
     }
 
-    const users = getUsers();
-    
-    if (users.find(u => u.email === email || u.username === username)) {
+    // Check if user exists
+    const existingUser = await User.findOne({
+      $or: [{ email }, { username }]
+    });
+
+    if (existingUser) {
       return res.status(400).json({ message: 'Utilisateur déjà existant' });
     }
 
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const newUser = {
-      id: users.length + 1,
+    const newUser = new User({
       email,
       username,
       fullname,
-      password: hashedPassword,
-      created_at: new Date().toISOString()
-    };
+      password: hashedPassword
+    });
 
-    users.push(newUser);
-    saveUsers(users);
+    await newUser.save();
 
     res.status(201).json({ message: 'Inscription réussie' });
   } catch (error) {
@@ -59,7 +46,7 @@ router.post('/register', (req, res) => {
 });
 
 // Login
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -67,19 +54,19 @@ router.post('/login', (req, res) => {
       return res.status(400).json({ message: 'Email et mot de passe requis' });
     }
 
-    const users = getUsers();
-    const user = users.find(u => u.email === email);
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ message: 'Identifiants invalides' });
     }
 
-    if (!bcrypt.compareSync(password, user.password)) {
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+    if (!passwordMatch) {
       return res.status(400).json({ message: 'Identifiants invalides' });
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: user._id, email: user.email },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
@@ -88,7 +75,7 @@ router.post('/login', (req, res) => {
       message: 'Connexion réussie',
       token,
       user: {
-        id: user.id,
+        id: user._id,
         email: user.email,
         username: user.username,
         fullname: user.fullname

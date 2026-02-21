@@ -2,10 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
+const connectDB = require('./config/mongodb');
 const authRoutes = require('./routes/auth');
 const quizRoutes = require('./routes/quiz');
 
 const app = express();
+
+// Connect to MongoDB
+if (process.env.MONGODB_URI) {
+  connectDB().catch(err => console.error('Failed to connect to MongoDB:', err));
+}
 
 // Middleware
 app.use(cors());
