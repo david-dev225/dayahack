@@ -3,14 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Wait for QUIZ_DATA to be loaded
   if (typeof QUIZ_DATA !== 'undefined') {
     loadCategories();
-    loadResults();
     setupEventListeners();
   } else {
     console.error('QUIZ_DATA not loaded yet, retrying...');
     setTimeout(() => {
       if (typeof QUIZ_DATA !== 'undefined') {
         loadCategories();
-        loadResults();
         setupEventListeners();
       } else {
         console.error('QUIZ_DATA still not available');
