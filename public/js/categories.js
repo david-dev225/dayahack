@@ -1,63 +1,43 @@
-// Check if user is logged in
-function checkAuth() {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    window.location.href = '/login';
-    return false;
-  }
-  return true;
-}
-
-// Initialize page
+// Categories Page - Load from embedded data
 document.addEventListener('DOMContentLoaded', () => {
-  if (checkAuth()) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      document.getElementById('userGreeting').textContent = `Bienvenue, ${user.fullname}!`;
-    }
-
+  // Wait for QUIZ_DATA to be loaded
+  if (typeof QUIZ_DATA !== 'undefined') {
     loadCategories();
     loadResults();
-
-    // Add event listener for mixed quiz button
-    const startMixedBtn = document.getElementById('startMixedBtn');
-    if (startMixedBtn) {
-      startMixedBtn.addEventListener('click', () => {
-        startMixedQuiz();
-      });
-    }
+    setupEventListeners();
+  } else {
+    console.error('QUIZ_DATA not loaded yet, retrying...');
+    setTimeout(() => {
+      if (typeof QUIZ_DATA !== 'undefined') {
+        loadCategories();
+        loadResults();
+        setupEventListeners();
+      } else {
+        console.error('QUIZ_DATA still not available');
+        alert('Erreur: Les données du quiz n\'ont pas pu être chargées');
+      }
+    }, 500);
   }
 });
 
-// Logout
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  window.location.href = '/';
-});
-
-// Load categories
-async function loadCategories() {
-  try {
-    const token = localStorage.getItem('token');
-    console.log('📌 Token:', token ? '✅ Existe' : '❌ Manquant');
-    console.log('📌 Appel API: /api/quiz/categories');
-    
-    const response = await fetch('/api/quiz/categories', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+function setupEventListeners() {
+  const startMixedBtn = document.getElementById('startMixedBtn');
+  if (startMixedBtn) {
+    startMixedBtn.addEventListener('click', () => {
+      startMixedQuiz();
     });
+  }
+}
 
-    console.log('📌 Status réponse:', response.status);
-
-    if (!response.ok) {
-      console.error('❌ Erreur API:', response.status, response.statusText);
-      throw new Error('Failed to fetch categories');
+// Load and display categories
+function loadCategories() {
+  try {
+    if (typeof QUIZ_DATA === 'undefined') {
+      console.error('QUIZ_DATA is not defined');
+      return;
     }
-
-    const categories = await response.json();
-    console.log('✅ Catégories chargées:', categories.length);
+    const categories = QUIZ_DATA.categories;
+    console.log('Categories loaded:', categories.length);
     displayCategories(categories);
   } catch (error) {
     console.error('Error loading categories:', error);
@@ -65,67 +45,62 @@ async function loadCategories() {
   }
 }
 
-// Display categories
+// Display categories in grid
 function displayCategories(categories) {
+  console.log('displayCategories called with', categories.length, 'categories');
   const container = document.getElementById('categoriesContainer');
+  
+  if (!container) {
+    console.error('Container #categoriesContainer not found');
+    return;
+  }
+  
+  console.log('Container found, clearing and populating');
   container.innerHTML = '';
 
   categories.forEach(category => {
+    console.log('Creating card for category:', category.name);
     const card = document.createElement('div');
     card.className = 'category-card';
     
-    const icons = {
-      'Web Development': '🌐',
-      'Mobile Development': '📱',
-      'Data Science': '📊',
-      'DevOps': '⚙️',
-      'Mixed': '🎯'
-    };
+    const questionsCount = QUIZ_DATA.questions.filter(q => q.category_id === category.id).length;
 
     card.innerHTML = `
       <div class="category-header">
-        ${icons[category.name] || '📚'}
+        ${category.icon}
       </div>
       <div class="category-body">
         <h3>${category.name}</h3>
-        <p>${category.description || 'Testez vos compétences'}</p>
+        <p>${category.description}</p>
+        <p style="font-size: 0.85em; color: var(--primary-color); margin: 10px 0;">📚 ${questionsCount} questions</p>
         <button class="btn btn-primary" onclick="startQuiz(${category.id}, '${category.name}')">
-          Commencer
+          Entraîner
         </button>
       </div>
     `;
 
     container.appendChild(card);
   });
+  
+  console.log('All categories displayed');
 }
 
-// Start quiz from category
+// Start category quiz
 function startQuiz(categoryId, categoryName) {
-  localStorage.setItem('currentCategory', JSON.stringify({ id: categoryId, name: categoryName }));
+  sessionStorage.setItem('currentCategory', JSON.stringify({ id: categoryId, name: categoryName }));
   window.location.href = '/quiz';
 }
 
 // Start mixed quiz (all categories)
 function startMixedQuiz() {
-  localStorage.setItem('currentCategory', JSON.stringify({ id: null, name: 'Mix complet' }));
+  sessionStorage.setItem('currentCategory', JSON.stringify({ id: null, name: 'Mix complet' }));
   window.location.href = '/quiz';
 }
 
-// Load results
-async function loadResults() {
+// Load results from localStorage
+function loadResults() {
   try {
-    const token = localStorage.getItem('token');
-    const response = await fetch('/api/quiz/results', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch results');
-    }
-
-    const results = await response.json();
+    const results = JSON.parse(localStorage.getItem('quizResults') || '[]');
     if (results.length > 0) {
       displayResults(results);
     }
@@ -141,21 +116,23 @@ function displayResults(results) {
   
   resultsContainer.innerHTML = '';
 
-  results.forEach(result => {
-    const date = new Date(result.completed_at).toLocaleDateString('fr-FR');
+  results.slice(0, 5).forEach(result => {
+    const date = new Date(result.date).toLocaleDateString('fr-FR');
     const resultItem = document.createElement('div');
     resultItem.className = 'result-item';
     resultItem.innerHTML = `
       <h4>${result.category}</h4>
       <p>Date: <strong>${date}</strong></p>
       <p class="result-score">
-        Score: ${result.score}/${result.total_questions} (${result.percentage}%)
+        Score: ${result.score}/${result.total} (${result.percentage}%)
       </p>
     `;
     resultsContainer.appendChild(resultItem);
   });
 
-  resultsSection.style.display = 'block';
+  if (results.length > 0) {
+    resultsSection.style.display = 'block';
+  }
 }
 
 function showError(message) {
