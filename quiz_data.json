@@ -1,0 +1,636 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Développement Logiciel",
+      "description": "Questions sur Développement Logiciel"
+    },
+    {
+      "id": 2,
+      "name": "Intelligence Artificielle & Data",
+      "description": "Questions sur Intelligence Artificielle & Data"
+    },
+    {
+      "id": 3,
+      "name": "Cybersécurité",
+      "description": "Questions sur Cybersécurité"
+    },
+    {
+      "id": 4,
+      "name": "Réseaux & Systèmes",
+      "description": "Questions sur Réseaux & Systèmes"
+    },
+    {
+      "id": 5,
+      "name": "Innovation & Entrepreneuriat Tech",
+      "description": "Questions sur Innovation & Entrepreneuriat Tech"
+    },
+    {
+      "id": 6,
+      "name": "Logique & Algorithmique",
+      "description": "Questions sur Logique & Algorithmique"
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "question_text": "Que signifie POO en informatique ?",
+      "option_a": "Programmation Orientée Objet",
+      "option_b": "Protocole d'Optimisation Opérationnelle",
+      "option_c": "Processus d'Opération Ordonnée",
+      "option_d": "Programme d'Opération en ligne",
+      "correct_answer": "D"
+    },
+    {
+      "id": 2,
+      "category_id": 1,
+      "question_text": "Qu'est-ce qu'un framework ?",
+      "option_a": "Un type de base de données",
+      "option_b": "Un ensemble d'outils facilitant le développement",
+      "option_c": "Un langage de programmation bas niveau",
+      "option_d": "Un protocole réseau",
+      "correct_answer": "D"
+    },
+    {
+      "id": 3,
+      "category_id": 1,
+      "question_text": "Laquelle de ces méthodes est une méthode agile ?",
+      "option_a": "Méthode en cascade",
+      "option_b": "Méthode MERISE",
+      "option_c": "Méthode SCRUM",
+      "option_d": "Méthode RAD",
+      "correct_answer": "D"
+    },
+    {
+      "id": 4,
+      "category_id": 1,
+      "question_text": "Que fait la commande 'git commit' ?",
+      "option_a": "Envoie le code vers un serveur distant",
+      "option_b": "Crée une nouvelle branche",
+      "option_c": "Fusionne deux branches",
+      "option_d": "Enregistre les modifications dans le dépôt local",
+      "correct_answer": "D"
+    },
+    {
+      "id": 5,
+      "category_id": 1,
+      "question_text": "Qu'est-ce qu'une base de données relationnelle ?",
+      "option_a": "Une base sans structure",
+      "option_b": "Une base qui stocke des documents JSON",
+      "option_c": "Une base organisée en tables reliées par des relations",
+      "option_d": "Une base uniquement en mémoire",
+      "correct_answer": "D"
+    },
+    {
+      "id": 6,
+      "category_id": 1,
+      "question_text": "Quel est le rôle du langage SQL ?",
+      "option_a": "Développer des interfaces web",
+      "option_b": "Interroger et manipuler des bases de données relationnelles",
+      "option_c": "Créer des algorithmes d'IA",
+      "option_d": "Compiler du code source",
+      "correct_answer": "D"
+    },
+    {
+      "id": 7,
+      "category_id": 1,
+      "question_text": "Que signifie MVC dans le développement logiciel ?",
+      "option_a": "Module View Control",
+      "option_b": "Main Visual Component",
+      "option_c": "Model View Controller",
+      "option_d": "Mobile Virtual Code",
+      "correct_answer": "D"
+    },
+    {
+      "id": 8,
+      "category_id": 1,
+      "question_text": "Qu'est-ce qu'un bug ?",
+      "option_a": "Un virus informatique",
+      "option_b": "Une erreur causant un comportement inattendu",
+      "option_c": "Un module non installé",
+      "option_d": "Un fichier corrompu",
+      "correct_answer": "D"
+    },
+    {
+      "id": 9,
+      "category_id": 1,
+      "question_text": "Qu'est-ce que le déploiement d'une application ?",
+      "option_a": "La phase de conception",
+      "option_b": "L'écriture des tests unitaires",
+      "option_c": "La documentation du code",
+      "option_d": "Le processus de mise en production d'une application",
+      "correct_answer": "D"
+    },
+    {
+      "id": 10,
+      "category_id": 1,
+      "question_text": "Quel est l'avantage principal des microservices ?",
+      "option_a": "Réduire le nombre de développeurs",
+      "option_b": "Supprimer la base de données",
+      "option_c": "Décomposer une application en services indépendants et scalables",
+      "option_d": "Accélérer uniquement le front-end",
+      "correct_answer": "D"
+    },
+    {
+      "id": 11,
+      "category_id": 2,
+      "question_text": "Qu'est-ce que le 'Big Data' ?",
+      "option_a": "Des fichiers de grande taille",
+      "option_b": "La gestion et l'analyse de volumes massifs de données",
+      "option_c": "Un type de réseau social",
+      "option_d": "Un logiciel de compression",
+      "correct_answer": "D"
+    },
+    {
+      "id": 12,
+      "category_id": 2,
+      "question_text": "Qu'est-ce qu'un réseau de neurones artificiels ?",
+      "option_a": "Un réseau informatique très rapide",
+      "option_b": "Un protocole de communication",
+      "option_c": "Un modèle inspiré du cerveau humain pour traiter des informations",
+      "option_d": "Un type de base de données",
+      "correct_answer": "D"
+    },
+    {
+      "id": 13,
+      "category_id": 2,
+      "question_text": "Que signifie NLP en intelligence artificielle ?",
+      "option_a": "Network Layer Protocol",
+      "option_b": "Neural Learning Process",
+      "option_c": "Node Link Programming",
+      "option_d": "Natural Language Processing",
+      "correct_answer": "D"
+    },
+    {
+      "id": 14,
+      "category_id": 2,
+      "question_text": "Qu'est-ce que l'overfitting en Machine Learning ?",
+      "option_a": "Un modèle trop simple",
+      "option_b": "Un modèle qui apprend trop bien les données d'entraînement et généralise mal",
+      "option_c": "Un manque de données",
+      "option_d": "Un problème de vitesse",
+      "correct_answer": "D"
+    },
+    {
+      "id": 15,
+      "category_id": 2,
+      "question_text": "Lequel de ces outils est utilisé pour la data science ?",
+      "option_a": "Photoshop",
+      "option_b": "Jupyter Notebook",
+      "option_c": "AutoCAD",
+      "option_d": "Figma",
+      "correct_answer": "D"
+    },
+    {
+      "id": 16,
+      "category_id": 2,
+      "question_text": "Qu'est-ce que la reconnaissance faciale ?",
+      "option_a": "Un système d'authentification par mot de passe",
+      "option_b": "Une technologie d'IA identifiant des personnes à partir de leur visage",
+      "option_c": "Un scanner de documents",
+      "option_d": "Un détecteur de virus",
+      "correct_answer": "D"
+    },
+    {
+      "id": 17,
+      "category_id": 2,
+      "question_text": "Que représente le terme 'dataset' ?",
+      "option_a": "Un logiciel de traitement de données",
+      "option_b": "Un ensemble de données utilisées pour entraîner un modèle",
+      "option_c": "Un protocole de sécurité",
+      "option_d": "Un framework de développement",
+      "correct_answer": "D"
+    },
+    {
+      "id": 18,
+      "category_id": 2,
+      "question_text": "Qu'est-ce que ChatGPT ?",
+      "option_a": "Un moteur de recherche",
+      "option_b": "Un modèle de langage conversationnel basé sur l'IA",
+      "option_c": "Un système d'exploitation",
+      "option_d": "Un antivirus",
+      "correct_answer": "D"
+    },
+    {
+      "id": 19,
+      "category_id": 2,
+      "question_text": "Qu'est-ce que la data visualisation ?",
+      "option_a": "La suppression de données inutiles",
+      "option_b": "La représentation graphique de données pour faciliter leur compréhension",
+      "option_c": "La sauvegarde automatique de données",
+      "option_d": "Le chiffrement des données",
+      "correct_answer": "D"
+    },
+    {
+      "id": 20,
+      "category_id": 2,
+      "question_text": "Qu'est-ce que le Deep Learning ?",
+      "option_a": "Une méthode de programmation bas niveau",
+      "option_b": "Un système de sauvegarde",
+      "option_c": "Une technique utilisant des réseaux de neurones profonds",
+      "option_d": "Un protocole réseau avancé",
+      "correct_answer": "D"
+    },
+    {
+      "id": 21,
+      "category_id": 3,
+      "question_text": "Qu'est-ce qu'une attaque par phishing ?",
+      "option_a": "Une attaque physique sur un serveur",
+      "option_b": "Une tentative de voler des informations sensibles via de faux messages",
+      "option_c": "Un virus qui supprime des fichiers",
+      "option_d": "Une surcharge de serveur",
+      "correct_answer": "D"
+    },
+    {
+      "id": 22,
+      "category_id": 3,
+      "question_text": "Que signifie 'chiffrement' en sécurité informatique ?",
+      "option_a": "Supprimer des données sensibles",
+      "option_b": "Transformer des données lisibles en données illisibles sans clé",
+      "option_c": "Compresser des fichiers",
+      "option_d": "Sauvegarder dans le cloud",
+      "correct_answer": "D"
+    },
+    {
+      "id": 23,
+      "category_id": 3,
+      "question_text": "Qu'est-ce qu'un pare-feu (firewall) ?",
+      "option_a": "Un antivirus",
+      "option_b": "Un système filtrant le trafic réseau selon des règles de sécurité",
+      "option_c": "Un protocole de communication",
+      "option_d": "Un outil de compression",
+      "correct_answer": "D"
+    },
+    {
+      "id": 24,
+      "category_id": 3,
+      "question_text": "Qu'est-ce qu'une attaque DDoS ?",
+      "option_a": "Un vol de mots de passe",
+      "option_b": "Un logiciel espion",
+      "option_c": "Une attaque qui surcharge un serveur avec des requêtes massives",
+      "option_d": "Une fuite de base de données",
+      "correct_answer": "D"
+    },
+    {
+      "id": 25,
+      "category_id": 3,
+      "question_text": "Que signifie l'authentification à deux facteurs (2FA) ?",
+      "option_a": "Se connecter avec deux mots de passe",
+      "option_b": "Utiliser deux appareils simultanément",
+      "option_c": "Vérifier l'identité avec deux éléments distincts",
+      "option_d": "Changer de mot de passe deux fois par mois",
+      "correct_answer": "D"
+    },
+    {
+      "id": 26,
+      "category_id": 3,
+      "question_text": "Qu'est-ce qu'un malware ?",
+      "option_a": "Un logiciel de mise à jour",
+      "option_b": "Un logiciel malveillant conçu pour nuire à un système",
+      "option_c": "Un protocole réseau",
+      "option_d": "Un outil de développement",
+      "correct_answer": "D"
+    },
+    {
+      "id": 27,
+      "category_id": 3,
+      "question_text": "Qu'est-ce que le principe du 'moindre privilège' ?",
+      "option_a": "Donner un accès total à tous les utilisateurs",
+      "option_b": "N'accorder aux utilisateurs que les droits strictement nécessaires",
+      "option_c": "Supprimer tous les mots de passe",
+      "option_d": "Utiliser un seul compte administrateur",
+      "correct_answer": "D"
+    },
+    {
+      "id": 28,
+      "category_id": 3,
+      "question_text": "Qu'est-ce qu'un certificat SSL ?",
+      "option_a": "Un antivirus pour serveurs",
+      "option_b": "Un type de base de données sécurisée",
+      "option_c": "Un protocole permettant de sécuriser les communications web",
+      "option_d": "Un outil de sauvegarde",
+      "correct_answer": "D"
+    },
+    {
+      "id": 29,
+      "category_id": 3,
+      "question_text": "Qu'est-ce qu'un ransomware ?",
+      "option_a": "Un logiciel de sauvegarde",
+      "option_b": "Un logiciel qui chiffre les données et demande une rançon",
+      "option_c": "Un scanner de réseau",
+      "option_d": "Un protocole de messagerie",
+      "correct_answer": "D"
+    },
+    {
+      "id": 30,
+      "category_id": 3,
+      "question_text": "Que signifie VPN ?",
+      "option_a": "Virtual Private Network",
+      "option_b": "Visual Protocol Network",
+      "option_c": "Verified Public Node",
+      "option_d": "Virtual Processing Nucleus",
+      "correct_answer": "D"
+    },
+    {
+      "id": 31,
+      "category_id": 4,
+      "question_text": "Que signifie l'acronyme 'API' ?",
+      "option_a": "Automated Process Integration",
+      "option_b": "Application Programming Interface",
+      "option_c": "Advanced Programming Index",
+      "option_d": "Application Protocol Interface",
+      "correct_answer": "D"
+    },
+    {
+      "id": 32,
+      "category_id": 4,
+      "question_text": "Quel protocole est utilisé pour sécuriser les échanges sur le web ?",
+      "option_a": "FTP",
+      "option_b": "HTTP",
+      "option_c": "SMTP",
+      "option_d": "HTTPS",
+      "correct_answer": "D"
+    },
+    {
+      "id": 33,
+      "category_id": 4,
+      "question_text": "Quel est le rôle d'un serveur DNS ?",
+      "option_a": "Chiffrer les données",
+      "option_b": "Gérer les mots de passe",
+      "option_c": "Traduire les noms de domaine en adresses IP",
+      "option_d": "Compresser les fichiers",
+      "correct_answer": "D"
+    },
+    {
+      "id": 34,
+      "category_id": 4,
+      "question_text": "Qu'est-ce qu'une adresse IP ?",
+      "option_a": "Un identifiant unique attribué à chaque appareil sur un réseau",
+      "option_b": "Un protocole de sécurité",
+      "option_c": "Un type de câble réseau",
+      "option_d": "Un logiciel de connexion",
+      "correct_answer": "D"
+    },
+    {
+      "id": 35,
+      "category_id": 4,
+      "question_text": "Quelle est la fonction principale d'un système d'exploitation ?",
+      "option_a": "Naviguer sur Internet",
+      "option_b": "Compiler du code source",
+      "option_c": "Gérer les ressources matérielles et logicielles d'un ordinateur",
+      "option_d": "Protéger contre les virus",
+      "correct_answer": "D"
+    },
+    {
+      "id": 36,
+      "category_id": 4,
+      "question_text": "Que signifie 'Cloud Computing' ?",
+      "option_a": "Un système de stockage local",
+      "option_b": "La fourniture de services informatiques via Internet",
+      "option_c": "Un type de processeur",
+      "option_d": "Un réseau local d'entreprise",
+      "correct_answer": "D"
+    },
+    {
+      "id": 37,
+      "category_id": 4,
+      "question_text": "Qu'est-ce que le protocole HTTP ?",
+      "option_a": "Un protocole de transfert de fichiers",
+      "option_b": "Un protocole de communication pour le Web",
+      "option_c": "Un protocole de messagerie électronique",
+      "option_d": "Un protocole de sécurité réseau",
+      "correct_answer": "D"
+    },
+    {
+      "id": 38,
+      "category_id": 4,
+      "question_text": "Qu'est-ce qu'un routeur ?",
+      "option_a": "Un appareil qui amplifie le signal Wi-Fi",
+      "option_b": "Un appareil qui dirige les paquets de données entre différents réseaux",
+      "option_c": "Un pare-feu matériel",
+      "option_d": "Un serveur DNS local",
+      "correct_answer": "D"
+    },
+    {
+      "id": 39,
+      "category_id": 4,
+      "question_text": "Qu'est-ce que la bande passante ?",
+      "option_a": "La vitesse du processeur",
+      "option_b": "La quantité de données pouvant être transmises par unité de temps",
+      "option_c": "La capacité d'un disque dur",
+      "option_d": "La fréquence du réseau Wi-Fi",
+      "correct_answer": "D"
+    },
+    {
+      "id": 40,
+      "category_id": 4,
+      "question_text": "Qu'est-ce que le protocole FTP ?",
+      "option_a": "Un protocole de sécurité",
+      "option_b": "Un protocole de transfert de fichiers entre client et serveur",
+      "option_c": "Un protocole d'authentification",
+      "option_d": "Un protocole de messagerie",
+      "correct_answer": "D"
+    },
+    {
+      "id": 41,
+      "category_id": 5,
+      "question_text": "Qu'est-ce qu'un MVP (Minimum Viable Product) ?",
+      "option_a": "Le produit final et complet",
+      "option_b": "Un rapport de projet",
+      "option_c": "La version minimale d'un produit permettant de tester une idée",
+      "option_d": "Un modèle économique",
+      "correct_answer": "D"
+    },
+    {
+      "id": 42,
+      "category_id": 5,
+      "question_text": "Qu'est-ce qu'un hackathon ?",
+      "option_a": "Une compétition de hacking illégal",
+      "option_b": "Un événement collaboratif de développement intensif pour résoudre des problèmes",
+      "option_c": "Un cours de programmation avancée",
+      "option_d": "Un salon informatique",
+      "correct_answer": "D"
+    },
+    {
+      "id": 43,
+      "category_id": 5,
+      "question_text": "Que signifie 'startup' ?",
+      "option_a": "Une grande entreprise multinationale",
+      "option_b": "Un projet open source",
+      "option_c": "Un département informatique",
+      "option_d": "Une jeune entreprise innovante à fort potentiel de croissance",
+      "correct_answer": "D"
+    },
+    {
+      "id": 44,
+      "category_id": 5,
+      "question_text": "Qu'est-ce que le design thinking ?",
+      "option_a": "Concevoir des interfaces graphiques",
+      "option_b": "Un framework de développement",
+      "option_c": "Une méthode de résolution de problèmes centrée sur l'utilisateur",
+      "option_d": "Un outil de gestion de projet",
+      "correct_answer": "D"
+    },
+    {
+      "id": 45,
+      "category_id": 5,
+      "question_text": "Que signifie IoT ?",
+      "option_a": "Integration of Technologies",
+      "option_b": "Interface of Tools",
+      "option_c": "Input Output Transfer",
+      "option_d": "Internet of Things",
+      "correct_answer": "D"
+    },
+    {
+      "id": 46,
+      "category_id": 5,
+      "question_text": "Qu'est-ce que la blockchain ?",
+      "option_a": "Un type de virus",
+      "option_b": "Un réseau social décentralisé",
+      "option_c": "Un registre décentralisé et immuable de transactions",
+      "option_d": "Un protocole de messagerie",
+      "correct_answer": "D"
+    },
+    {
+      "id": 47,
+      "category_id": 5,
+      "question_text": "Qu'est-ce que l'UX Design ?",
+      "option_a": "La conception visuelle d'un logo",
+      "option_b": "Un langage de programmation web",
+      "option_c": "La conception de l'expérience globale de l'utilisateur",
+      "option_d": "Un outil de test automatique",
+      "correct_answer": "D"
+    },
+    {
+      "id": 48,
+      "category_id": 5,
+      "question_text": "Qu'est-ce qu'un pitch de projet ?",
+      "option_a": "Un rapport technique détaillé",
+      "option_b": "Un prototype fonctionnel",
+      "option_c": "Un plan financier complet",
+      "option_d": "Une présentation courte et percutante d'un projet",
+      "correct_answer": "D"
+    },
+    {
+      "id": 49,
+      "category_id": 5,
+      "question_text": "Qu'est-ce que la réalité augmentée (AR) ?",
+      "option_a": "Un environnement entièrement virtuel",
+      "option_b": "La superposition d'éléments numériques sur le monde réel",
+      "option_c": "Un système de simulation 3D",
+      "option_d": "Un logiciel de retouche photo",
+      "correct_answer": "D"
+    },
+    {
+      "id": 50,
+      "category_id": 5,
+      "question_text": "Qu'est-ce que le No-Code ?",
+      "option_a": "Programmer sans utiliser de langage",
+      "option_b": "Créer des applications sans écrire de code grâce à des outils visuels",
+      "option_c": "Un framework minimaliste",
+      "option_d": "Un système d'exploitation simplifié",
+      "correct_answer": "D"
+    },
+    {
+      "id": 51,
+      "category_id": 6,
+      "question_text": "Si un programme est O(n²), que se passe-t-il si on double la taille des données ?",
+      "option_a": "Le temps double",
+      "option_b": "Le temps triple",
+      "option_c": "Le temps quadruple",
+      "option_d": "Le temps reste constant",
+      "correct_answer": "D"
+    },
+    {
+      "id": 52,
+      "category_id": 6,
+      "question_text": "Quelle structure de données fonctionne en LIFO (Last In, First Out) ?",
+      "option_a": "File (Queue)",
+      "option_b": "Liste chaînée",
+      "option_c": "Tableau",
+      "option_d": "Pile (Stack)",
+      "correct_answer": "D"
+    },
+    {
+      "id": 53,
+      "category_id": 6,
+      "question_text": "Qu'est-ce qu'une fonction récursive ?",
+      "option_a": "Une fonction qui s'exécute en parallèle",
+      "option_b": "Une fonction qui s'appelle elle-même",
+      "option_c": "Une fonction sans paramètres",
+      "option_d": "Une fonction exécutée automatiquement",
+      "correct_answer": "D"
+    },
+    {
+      "id": 54,
+      "category_id": 6,
+      "question_text": "Quel est le résultat de : 5 % 3 en programmation ?",
+      "option_a": "1,67",
+      "option_b": "0",
+      "option_c": "2",
+      "option_d": "15",
+      "correct_answer": "D"
+    },
+    {
+      "id": 55,
+      "category_id": 6,
+      "question_text": "Qu'est-ce qu'une condition 'if-else' ?",
+      "option_a": "Une boucle de répétition",
+      "option_b": "Une structure de contrôle permettant d'exécuter du code selon une condition",
+      "option_c": "Une déclaration de variable",
+      "option_d": "Un appel de fonction",
+      "correct_answer": "D"
+    },
+    {
+      "id": 56,
+      "category_id": 6,
+      "question_text": "Quelle est la différence entre une erreur de syntaxe et une erreur logique ?",
+      "option_a": "Il n'y a aucune différence",
+      "option_b": "Une erreur de syntaxe empêche l'exécution ; une erreur logique produit un résultat",
+      "option_c": "Une erreur logique empêche la compilation",
+      "option_d": "Les deux arrêtent le programme de la même façon",
+      "correct_answer": "D"
+    },
+    {
+      "id": 57,
+      "category_id": 6,
+      "question_text": "Combien d'éléments peut contenir un tableau de taille n (indices de 0 à n-1) ?",
+      "option_a": "n-1",
+      "option_b": "n+1",
+      "option_c": "2n",
+      "option_d": "n",
+      "correct_answer": "D"
+    },
+    {
+      "id": 58,
+      "category_id": 6,
+      "question_text": "Qu'est-ce qu'une boucle infinie ?",
+      "option_a": "Une boucle qui s'exécute exactement 1000 fois",
+      "option_b": "Une boucle dont la condition de sortie n'est jamais atteinte",
+      "option_c": "Une boucle très rapide",
+      "option_d": "Une boucle avec plusieurs conditions",
+      "correct_answer": "D"
+    },
+    {
+      "id": 59,
+      "category_id": 6,
+      "question_text": "Parmi ces algorithmes de tri, lequel est le plus efficace en moyenne ?",
+      "option_a": "Tri à bulles",
+      "option_b": "Tri par insertion",
+      "option_c": "Tri rapide (Quick Sort)",
+      "option_d": "Tri par sélection",
+      "correct_answer": "D"
+    },
+    {
+      "id": 60,
+      "category_id": 6,
+      "question_text": "Qu'est-ce que la programmation fonctionnelle ?",
+      "option_a": "Une programmation uniquement pour les mathématiques",
+      "option_b": "Un paradigme basé sur l'utilisation de fonctions pures sans effets de bord",
+      "option_c": "Un style utilisant uniquement des boucles",
+      "option_d": "Un langage de programmation spécifique",
+      "correct_answer": "D"
+    }
+  ]
+}
