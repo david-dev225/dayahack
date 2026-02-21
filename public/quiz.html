@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - DayaHack</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <main class="quiz-container">
+      <div class="quiz-header">
+        <div class="quiz-info">
+          <h2 id="categoryName"></h2>
+          <span id="questionCounter">Question 0/0</span>
+        </div>
+        <div class="quiz-timer">
+          <div id="timer" class="timer-display">15</div>
+          <p>Secondes</p>
+        </div>
+      </div>
+
+      <div id="quizContent" class="quiz-content">
+        <div id="questionContainer" class="question-container">
+          <h3 id="questionText"></h3>
+          
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="answer" value="A">
+              <span id="optionA"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="B">
+              <span id="optionB"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="C">
+              <span id="optionC"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="D">
+              <span id="optionD"></span>
+            </label>
+          </div>
+
+          <button id="nextBtn" class="btn btn-primary" style="margin-top: 30px;">Suivant</button>
+        </div>
+
+        <div id="resultScreen" class="result-screen" style="display: none;">
+          <h2>Quiz Terminé!</h2>
+          <div class="result-box">
+            <p class="score-value" id="scoreValue">0</p>
+            <p class="score-text">sur <span id="totalQuestions">15</span> questions</p>
+            <p class="percentage" id="percentageValue">0%</p>
+          </div>
+          <a href="/categories" class="btn btn-primary">Retour aux catégories</a>
+        </div>
+      </div>
+
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/quiz.js"></script>
+</body>
+</html>

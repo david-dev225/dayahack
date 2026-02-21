@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesure-toi - DayaHack</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <h1>DayaHack</h1>
+        <div class="header-actions">
+          <span id="userGreeting"></span>
+          <button id="logoutBtn" class="btn btn-small">Déconnexion</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <h2 class="hero-title">Mesure-toi.</h2>
+        <p class="hero-subtitle">60 questions chronométrées. Clique directement sur un thème pour t'évaluer dessus.</p>
+
+        <!-- Stats Cards -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-value">60</div>
+            <div class="stat-label">QUESTIONS / SESSION</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">15s</div>
+            <div class="stat-label">PAR QUESTION</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">100</div>
+            <div class="stat-label">BANK TOTAL</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">5</div>
+            <div class="stat-label">MODES D'ENTRAÎNEMENT</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="categories-section">
+        <h3 class="section-subtitle">CHOISIR UN THÈME – clique pour lancer l'entraînement ciblé</h3>
+
+        <div id="categoriesContainer" class="categories-grid">
+          <!-- Les catégories seront chargées dynamiquement ici -->
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+          <button id="startMixedBtn" class="btn btn-cta">
+            <span class="play-icon">▶</span> Commencer — Mix complet
+          </button>
+        </div>
+      </section>
+
+      <!-- Results Section -->
+      <div id="resultsSection" class="results-section" style="display: none;">
+        <h2>Vos Résultats</h2>
+        <div id="resultsContainer" class="results-list">
+          <!-- Les résultats seront affichés ici -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="quizModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+      <button id="startQuizBtn" class="btn btn-primary">Commencer le Quiz</button>
+    </div>
+  </div>
+
+  <script src="/js/categories.js"></script>
+</body>
+</html>

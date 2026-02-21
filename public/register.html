@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - DayaHack</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>DayaHack</h1>
+      <p>Inscription Hackathon</p>
+    </header>
+
+    <main class="main-content">
+      <div class="auth-form-container">
+        <form id="registerForm" class="auth-form">
+          <h2>Créer un compte</h2>
+          
+          <div class="form-group">
+            <label for="fullname">Nom complet</label>
+            <input type="text" id="fullname" name="fullname" required placeholder="Votre nom complet">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="votre@email.com">
+          </div>
+
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" required placeholder="Nom d'utilisateur">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required placeholder="Au moins 6 caractères">
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirmer le mot de passe">
+          </div>
+
+          <button type="submit" class="btn btn-primary full-width">S'inscrire</button>
+
+          <p class="form-footer">
+            Vous avez déjà un compte? <a href="login.html">Se connecter</a>
+          </p>
+        </form>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+        <div id="successMessage" class="success-message" style="display: none;"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/register.js"></script>
+</body>
+</html>
