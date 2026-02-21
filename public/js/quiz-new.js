@@ -5,6 +5,8 @@ let responses = [];
 let timePerQuestion = 15;
 let timerId = null;
 let categoryData = null;
+let isQuizActive = true;
+let isTransitioning = false;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,8 +83,11 @@ function displayQuestion() {
   const percentage = ((currentQuestionIndex) / questions.length) * 100;
   document.querySelector('.progress-fill').style.width = percentage + '%';
 
-  // Reset timer display
+  // Réinitialiser et démarrer le timer pour la nouvelle question
   resetTimer();
+  
+  // Marquer la transition comme complète
+  isTransitioning = false;
 }
 
 // Select answer
@@ -93,42 +98,105 @@ function selectAnswer(answer) {
   }
 }
 
+// Submit current question (user clicks Validate button)
+function submitCurrentQuestion() {
+  if (!isQuizActive || isTransitioning) {
+    return;
+  }
+
+  const selected = document.querySelector('input[name="answer"]:checked');
+  
+  if (!selected) {
+    showError('⚠️ Veuillez sélectionner une réponse');
+    return;
+  }
+
+  const answer = selected.value;
+  responses[currentQuestionIndex] = answer;
+  
+  // Stop timer and move to next question
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+  
+  nextQuestion();
+}
+
 // Timer functions
 function startTimer() {
+  // Arrêter tout timer précédent
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+
   let timeLeft = timePerQuestion;
+  const timerDisplay = document.getElementById('timerDisplay');
+  
+  // Réinitialiser l'affichage
+  timerDisplay.className = 'timer-display';
+  timerDisplay.textContent = timeLeft;
   
   timerId = setInterval(() => {
     timeLeft--;
-    const timerDisplay = document.getElementById('timerDisplay');
+    
+    if (!isQuizActive) {
+      clearInterval(timerId);
+      timerId = null;
+      return;
+    }
     
     timerDisplay.textContent = timeLeft;
+    timerDisplay.className = 'timer-display';
     
-    if (timeLeft <= 5) {
+    if (timeLeft <= 5 && timeLeft > 0) {
       timerDisplay.classList.add('warning');
     }
-    if (timeLeft <= 2) {
+    if (timeLeft <= 2 && timeLeft > 0) {
+      timerDisplay.classList.remove('warning');
       timerDisplay.classList.add('danger');
     }
     
     if (timeLeft <= 0) {
       clearInterval(timerId);
-      nextQuestion();
+      timerId = null;
+      if (isQuizActive && !isTransitioning) {
+        nextQuestion();
+      }
     }
   }, 1000);
 }
 
 function resetTimer() {
-  if (timerId) clearInterval(timerId);
-  document.getElementById('timerDisplay').className = '';
+  // Arrêter complètement le timer précédent
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
   startTimer();
 }
 
 // Next question
 function nextQuestion() {
+  // Empêcher les appels multiples pendant la transition
+  if (isTransitioning || !isQuizActive) {
+    return;
+  }
+  
+  isTransitioning = true;
+  
+  // Arrêter complètement le chronomètre
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+  
   currentQuestionIndex++;
   
   if (currentQuestionIndex < questions.length) {
     displayQuestion();
+    isTransitioning = false;
   } else {
     submitQuiz();
   }
@@ -144,7 +212,13 @@ function previousQuestion() {
 
 // Submit quiz
 function submitQuiz() {
-  if (timerId) clearInterval(timerId);
+  // Arrêter complètement le quiz
+  isQuizActive = false;
+  
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
 
   // Calculate score
   let correctCount = 0;
@@ -205,6 +279,16 @@ function getResultMessage(percentage) {
 
 // Skip question button
 function skipQuestion() {
+  if (!isQuizActive || isTransitioning) {
+    return;
+  }
+  
+  // Arrêter le chronomètre et passer à la question suivante
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+  
   nextQuestion();
 }
 

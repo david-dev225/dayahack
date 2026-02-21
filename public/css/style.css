@@ -633,6 +633,32 @@ body {
   background: linear-gradient(135deg, #1a1f2e 0%, #0f1419 100%);
 }
 
+.quiz-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+#validateBtn {
+  flex-grow: 1;
+  max-width: 300px;
+  font-weight: 700;
+  font-size: 1.05em;
+  padding: 14px 30px;
+}
+
+#skipBtn {
+  flex: 1;
+  min-width: 120px;
+}
+
+.quiz-actions a {
+  flex: 1;
+  min-width: 120px;
+}
+
 .question-container h3 {
   margin-bottom: 30px;
   color: white;
